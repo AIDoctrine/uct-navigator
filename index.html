@@ -86,11 +86,44 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="enter">Enter Explorer &rarr;</div>
     </div>
   </div>
-  <div class="footer">
+  
+  <!-- ARCHITECTURE -->
+  <div style="width:100%;max-width:1000px;margin-top:3rem;opacity:0;animation:fadeDown .6s .9s forwards;">
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:2rem;margin-bottom:1.5rem;">
+      <div style="font-family:var(--mono);font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">The Architecture</div>
+      <div style="font-size:.95rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.5rem;">Every UCT Navigator is a 4-tuple <strong style="color:var(--text)">(S, M, T, H)</strong>: a state space, a metric, transition rules, and a steering heuristic. The key insight: <span style="color:var(--gold);font-weight:600">navigation replaces computation</span>. Instead of evaluating a function at every point, we follow the geometry of the solution landscape.</div>
+      <div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.72rem;">
+        <thead><tr style="border-bottom:1px solid var(--border);"><th style="padding:.6rem;text-align:left;color:var(--text-muted);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;">Component</th><th style="padding:.6rem;text-align:left;color:var(--gold);font-size:.6rem;letter-spacing:.1em;">Collatz</th><th style="padding:.6rem;text-align:left;color:var(--cyan);font-size:.6rem;letter-spacing:.1em;">Riemann</th><th style="padding:.6rem;text-align:left;color:var(--green);font-size:.6rem;letter-spacing:.1em;">Twin Primes</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(37,42,56,0.5);"><td style="padding:.6rem;color:var(--text);">S &mdash; State Space</td><td style="padding:.6rem;color:var(--text-dim);">Odd integers mod 240</td><td style="padding:.6rem;color:var(--text-dim);">Gram points n</td><td style="padding:.6rem;color:var(--text-dim);">Residues mod 240</td></tr>
+          <tr style="border-bottom:1px solid rgba(37,42,56,0.5);"><td style="padding:.6rem;color:var(--text);">M &mdash; Metric</td><td style="padding:.6rem;color:var(--text-dim);">Drift &delta;(m) = log&#8322;(m)&minus;2</td><td style="padding:.6rem;color:var(--text-dim);">E&#8328; correction &delta;(n)</td><td style="padding:.6rem;color:var(--text-dim);">HL error &epsilon;(x)</td></tr>
+          <tr style="border-bottom:1px solid rgba(37,42,56,0.5);"><td style="padding:.6rem;color:var(--text);">T &mdash; Transitions</td><td style="padding:.6rem;color:var(--text-dim);">Inverse tree: 2x or (x&minus;1)/3</td><td style="padding:.6rem;color:var(--text-dim);">&gamma;&#8345; = &gamma;&#8345;&#8331;&#8321; + s&#8345;/&rho;</td><td style="padding:.6rem;color:var(--text-dim);">CRT decomposition</td></tr>
+          <tr style="border-bottom:1px solid rgba(37,42,56,0.5);"><td style="padding:.6rem;color:var(--text);">H &mdash; Heuristic</td><td style="padding:.6rem;color:var(--text-dim);">DNA score + slots {79,159,207}</td><td style="padding:.6rem;color:var(--text-dim);">5 quasiperiodic frequencies</td><td style="padding:.6rem;color:var(--text-dim);">Percolation &eta; = 5/12</td></tr>
+        </tbody></table></div>
+    </div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:2rem;margin-bottom:1.5rem;">
+      <div style="font-family:var(--mono);font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Complexity Reduction</div>
+      <div style="font-size:.95rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.5rem;">Navigation is not a metaphor &mdash; it produces <strong style="color:var(--text)">measurable speedup</strong>.</div>
+      <div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.72rem;">
+        <thead><tr style="border-bottom:1px solid var(--border);"><th style="padding:.6rem;text-align:left;color:var(--text-muted);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;">Problem</th><th style="padding:.6rem;text-align:left;color:var(--red);font-size:.6rem;letter-spacing:.1em;">Brute Force</th><th style="padding:.6rem;text-align:left;color:var(--green);font-size:.6rem;letter-spacing:.1em;">Navigator</th><th style="padding:.6rem;text-align:left;color:var(--gold);font-size:.6rem;letter-spacing:.1em;">Speedup</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(37,42,56,0.5);"><td style="padding:.6rem;color:var(--text);">Collatz champion T=144</td><td style="padding:.6rem;color:var(--red);">Test ~10&#xB9;&#xB2; numbers</td><td style="padding:.6rem;color:var(--green);">Inverse tree: seconds</td><td style="padding:.6rem;color:var(--gold);font-weight:700;">&gt;10&#x2079;&times;</td></tr>
+          <tr style="border-bottom:1px solid rgba(37,42,56,0.5);"><td style="padding:.6rem;color:var(--text);">Riemann zero at 10&#x2076;&#x2078;</td><td style="padding:.6rem;color:var(--red);">&zeta;(s): ~10&#xB3;&#x2074; ops</td><td style="padding:.6rem;color:var(--green);">O(1) per zero: 5 sin/cos</td><td style="padding:.6rem;color:var(--gold);font-weight:700;">10&#xB3;&#x2074;&times;</td></tr>
+          <tr style="border-bottom:1px solid rgba(37,42,56,0.5);"><td style="padding:.6rem;color:var(--text);">Twin prime error</td><td style="padding:.6rem;color:var(--red);">BV: 1/&radic;(ln x)</td><td style="padding:.6rem;color:var(--green);">Power law: x&#x207B;&#x2070;&#x22C5;&#x2074;&#x2075;</td><td style="padding:.6rem;color:var(--gold);font-weight:700;">28&times; at 10&#x2076;, 10&#x2077;&times; at 10&#xB9;&#x2078;</td></tr>
+          <tr style="border-bottom:1px solid rgba(37,42,56,0.5);"><td style="padding:.6rem;color:var(--text);">GUE verification</td><td style="padding:.6rem;color:var(--red);">Months of CPU</td><td style="padding:.6rem;color:var(--green);">3 sec on phone</td><td style="padding:.6rem;color:var(--gold);font-weight:700;">11/11 heights &#10003;</td></tr>
+        </tbody></table></div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(232,184,75,0.08),rgba(103,232,249,0.05));border:1px solid var(--gold-dim);border-radius:14px;padding:2rem;">
+      <div style="font-family:var(--mono);font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">The Unifying Principle</div>
+      <div style="font-size:.95rem;color:var(--text-dim);line-height:1.8;">All three navigators share one geometric substrate: the <strong style="color:var(--gold)">E&#8328; lattice</strong> with kissing number K&#8328; = 240. The modulus 240 governs Collatz champion classification, Riemann zero spacing corrections, and twin prime channel structure. The universal navigation constant <span style="color:var(--cyan);font-family:var(--mono);">log&#8322;(4/3) &asymp; 5/12 &asymp; 0.415</span> appears in all three domains as the third convergent of the same continued fraction. This is not three separate tools &mdash; it is <strong style="color:var(--text)">one geometry viewed from three angles</strong>.</div>
+    </div>
+  </div>
+
+<div class="footer">
     Aleksei Novgorodtsev &middot; ORCID <a href="https://orcid.org/0009-0009-2407-7049">0009-0009-2407-7049</a><br>
     DOI: <a href="https://doi.org/10.5281/zenodo.18659804">10.5281/zenodo.18659804</a><br>
     <span style="color:var(--gold)">&laquo;We don't calculate &mdash; we navigate!&raquo;</span><br>
-    <span style="color:var(--text-muted)">19 tabs &middot; 3 domains &middot; 0 external dependencies &middot; 1 file</span>
+    <span style="color:var(--text-muted)">19 tabs &middot; 3 domains &middot; 0 JS dependencies &middot; 1 file</span>
   </div>
 </div>
 
@@ -126,6 +159,9 @@ function closeDemos(){
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('demo-view').style.display==='block')closeDemos()});
 </script>
+
+
+
 
 
 
@@ -2575,60 +2611,8 @@ drawCRT(2);
 drawAdmChart();
 // ═══ RESIZE HANDLER ═══
 // ═══ SPECTRUM CHART ═══
-function drawSpectrum(){
-  const c=document.getElementById(&#x27;spectrum-chart&#x27;);if(!c)return;
-  const ctx=c.getContext(&#x27;2d&#x27;);const dpr=window.devicePixelRatio||1;
-  c.width=c.offsetWidth*dpr;c.height=480;ctx.scale(dpr,dpr);
-  const W=c.offsetWidth,H=240,pad={l:55,r:20,t:25,b:40};
-  ctx.fillStyle=&#x27;#0a0c10&#x27;;ctx.fillRect(0,0,W,H);
-  const tiers=[
-    {name:&#x27;Silent&#x27;,val:0,count:210,col:&#x27;#555d74&#x27;},
-    {name:&#x27;Cross (3×5)&#x27;,val:64,count:16,col:&#x27;#c084fc&#x27;},
-    {name:&#x27;Mod-5&#x27;,val:256,count:8,col:&#x27;#4ade80&#x27;},
-    {name:&#x27;Mod-3&#x27;,val:1024,count:4,col:&#x27;#67e8f9&#x27;},
-    {name:&#x27;DC&#x27;,val:4096,count:2,col:&#x27;#e8b84b&#x27;}
-  ];
-  const maxV=4500,barW=(W-pad.l-pad.r)/tiers.length*0.6,sp=(W-pad.l-pad.r)/tiers.length;
-  // Grid
-  ctx.strokeStyle=&#x27;#252a38&#x27;;ctx.lineWidth=.5;
-  [0,1024,2048,3072,4096].forEach(v=&gt;{
-    const y=H-pad.b-(v/maxV)*(H-pad.t-pad.b);
-    ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();
-    ctx.fillStyle=&#x27;#555d74&#x27;;ctx.font=&#x27;9px JetBrains Mono&#x27;;ctx.textAlign=&#x27;right&#x27;;
-    ctx.fillText(v,pad.l-6,y+3);
-  });
-  tiers.forEach((t,i)=&gt;{
-    const x=pad.l+sp*i+(sp-barW)/2;
-    const h=(t.val/maxV)*(H-pad.t-pad.b);const y=H-pad.b-h;
-    const grad=ctx.createLinearGradient(x,y,x,y+h);
-    grad.addColorStop(0,t.col);grad.addColorStop(1,t.col+&#x27;33&#x27;);
-    ctx.fillStyle=grad;ctx.fillRect(x,y,barW,Math.max(h,2));
-    ctx.strokeStyle=t.col;ctx.lineWidth=1;ctx.strokeRect(x,y,barW,Math.max(h,2));
-    ctx.fillStyle=t.col;ctx.font=&#x27;bold 11px JetBrains Mono&#x27;;ctx.textAlign=&#x27;center&#x27;;
-    ctx.fillText(t.val,x+barW/2,y-12);
-    ctx.font=&#x27;9px JetBrains Mono&#x27;;ctx.fillText(&#x27;×&#x27;+t.count,x+barW/2,y-1);
-    ctx.fillStyle=&#x27;#8890a4&#x27;;ctx.font=&#x27;8px DM Sans&#x27;;
-    ctx.fillText(t.name,x+barW/2,H-pad.b+14);
-  });
-  ctx.fillStyle=&#x27;#8890a4&#x27;;ctx.font=&#x27;10px DM Sans&#x27;;ctx.textAlign=&#x27;center&#x27;;
-  ctx.fillText(&#x27;|F(k)|² — Fourier Power Spectrum of Coprime Indicator on Z/240Z&#x27;,W/2,16);
-}
-
 
 // ═══ CROSS-DOMAIN TABLE ═══
-function drawCrossDomain(){
-  const el=document.getElementById(&#x27;cross-table&#x27;);if(!el)return;
-  el.innerHTML=&#x27;&lt;table class=&quot;result-table&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Property&lt;/th&gt;&lt;th style=&quot;color:var(--cyan)&quot;&gt;DNA Syntax&lt;/th&gt;&lt;th style=&quot;color:var(--gold)&quot;&gt;Prime Syntax&lt;/th&gt;&lt;th style=&quot;color:var(--green)&quot;&gt;Protein Architecture&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;+
-  &#x27;&lt;tr&gt;&lt;td&gt;Total objects&lt;/td&gt;&lt;td&gt;16 dinucleotide pairs&lt;/td&gt;&lt;td&gt;64 coprime residues&lt;/td&gt;&lt;td&gt;K₈ = 240 root vectors&lt;/td&gt;&lt;/tr&gt;&#x27;+
-  &#x27;&lt;tr&gt;&lt;td&gt;Selection rule&lt;/td&gt;&lt;td&gt;Purine-pyrimidine alternation&lt;/td&gt;&lt;td&gt;Both r, r+2 coprime to 240&lt;/td&gt;&lt;td&gt;Amino acid encoding&lt;/td&gt;&lt;/tr&gt;&#x27;+
-  &#x27;&lt;tr&gt;&lt;td&gt;Active subset&lt;/td&gt;&lt;td class=&quot;cyan-val&quot;&gt;8 ALTERNATING (50%)&lt;/td&gt;&lt;td class=&quot;gold-val&quot;&gt;24 twin-admissible (37.5%)&lt;/td&gt;&lt;td class=&quot;pass&quot;&gt;20 amino acids (K₈/K₃)&lt;/td&gt;&lt;/tr&gt;&#x27;+
-  &#x27;&lt;tr&gt;&lt;td&gt;Inactive subset&lt;/td&gt;&lt;td&gt;8 HOMO (50%)&lt;/td&gt;&lt;td&gt;40 non-admissible&lt;/td&gt;&lt;td&gt;44 non-coding&lt;/td&gt;&lt;/tr&gt;&#x27;+
-  &#x27;&lt;tr&gt;&lt;td&gt;Active property&lt;/td&gt;&lt;td&gt;φ-resonance +64.7%&lt;/td&gt;&lt;td&gt;Uniform H → H_max&lt;/td&gt;&lt;td&gt;Universal genetic code&lt;/td&gt;&lt;/tr&gt;&#x27;+
-  &#x27;&lt;tr&gt;&lt;td&gt;Base factor&lt;/td&gt;&lt;td class=&quot;gold-val&quot;&gt;8 = rank(E₈)&lt;/td&gt;&lt;td class=&quot;gold-val&quot;&gt;8 = φ(16)&lt;/td&gt;&lt;td class=&quot;gold-val&quot;&gt;8 = E₈ dimension&lt;/td&gt;&lt;/tr&gt;&#x27;+
-  &#x27;&lt;tr&gt;&lt;td&gt;Governing modulus&lt;/td&gt;&lt;td&gt;16 (4 bases × 4)&lt;/td&gt;&lt;td&gt;240 = K₈&lt;/td&gt;&lt;td&gt;K₈/K₃ = 20&lt;/td&gt;&lt;/tr&gt;&#x27;+
-  &#x27;&lt;/tbody&gt;&lt;/table&gt;&#x27;;
-}
-
 
 window.addEventListener(&#x27;resize&#x27;,()=&gt;{
   const ap=document.querySelector(&#x27;.panel.active&#x27;).id;
